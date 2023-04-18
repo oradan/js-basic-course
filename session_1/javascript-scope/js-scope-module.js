@@ -1,3 +1,2 @@
-console.log(myGlobalVar)
-
-var myModuleVariable = "I am visible only in this file"
+console.log(test, " test from the module file");
+var test = " Test !!!!!";
