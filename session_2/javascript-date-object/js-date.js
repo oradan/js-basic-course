@@ -1,71 +1,36 @@
 // https://www.toptal.com/software/definitive-guide-to-datetime-manipulation
 // about UTC https://www.utctime.net/
 // https://www.geeksforgeeks.org/javascript-date-objects/
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
 
 
-// calculate if is the end of campaign
-
-const dateString = '2023-03-04T15:08:00';
-const satrtDate = new Date('2023-03-6');
 const now = new Date();
+console.log(now.getTime())
+console.log(now)
 
-function isTheEndOfCampaign(startDateStr, days) {
-    const endDate = new Date(startDateStr);
-    const endDay = endDate.getDate() + days;
-    endDate.setDate(endDay);
-    return endDate.getTime() <= new Date().getTime()
+const date = new Date('2023-04-20T16:10:00')
+console.log(date);
+console.log(date.toLocaleDateString('en-EN',{
+    weekday:'long',
+    month:'long',
+    year:'numeric',
+    day:"numeric",
+    hour:'2-digit'
+}));
+console.log(date.getFullYear());
+console.log(date.getMonth()+1);
+console.log(date.getDay());
+console.log(date.getDate());
+console.log(date.getHours());
+console.log(date.getMinutes());
+console.log(date.getSeconds());
+
+const startDate = '2023-04-18T17:00:00';
+
+function isTheEndOfCampaign(startDate,days) {
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + days);
+    return endDate.getTime() <= new Date().getTime();
 }
 
-// finding the number of days between tow dates
-
-function daysDiff(firstdate, secondDate) {
-    const milisecondsDiff = Math.abs(firstdate.getTime() - secondDate.getTime());
-    const dayDiff = Math.round(milisecondsDiff / (1000 * 60 * 60 * 24));
-    return dayDiff;
-}
-
-
-function dayDiffVersion2(firstDate, secondDate) {
-    const firstD = Date.parse(firstDate);
-    const secondD = secondDate ? Date.parse(secondDate) : Date.now();
-    const miliseconds = Math.abs(firstD - secondD) / 1000 / 60 / 60 / 24;
-    const milisecondss = Math.abs(firstD - secondD) / (1000 * 60 * 60 *24);
-    const dayDiff = Math.round(miliseconds);
-    return dayDiff
-  }
-  
-
-
-function isInPast(date, now) {
-    return date.setHours(0, 0, 0, 0) <= now.setHours(0, 0, 0, 0);
-}
-
-function campaignStatusMsg(startDateStr, days) {
-    let message = "";
-    return message = isTheEndOfCampaign(startDateStr, days) ? "We are sorry but the campaign is over " : `There are ${daysDiff(new Date(startDateStr), new Date())} days left from the campaign`
-}
-
-const msg = campaignStatusMsg(dateString, 1)
-console.log(msg)
-const isPast = isInPast(satrtDate, now)
-
-
-const dateFromAPI = "2016-01-02T12:30:00Z";
-
-const localDate = new Date();
-const localDateString = localDate.toLocaleDateString('ro-RO', {  
-    weekday:   'long',
-    month: 'long',
-    year:  'numeric',
-    day: 'numeric'
-});
-
-
-const localTimeString = localDate.toLocaleTimeString('ro-RO', {
-    hour:   '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-});
-
-console.log(localDateString)
-console.log(localTimeString)
+console.log(isTheEndOfCampaign(startDate,2))
