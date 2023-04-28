@@ -67,23 +67,23 @@ const comments = {
 
 // 1. Count the number of people in the peeps array.
 
-// 2. List full names of people in a new array.
+// 2. List full names of people in a new array of strings.
 
-// 3. Return “true” if everyone is older than 24.
+// 3. Return/save in a variable  “true” if everyone is older than 24 and save in a constant use peeps array Ex: allAre24.
 
-// 4. Return “true” if at least one person is younger than 26.
+// 4. Return/save in a variable “true” if at least one person is younger than 26.
 
-// 5. Return a new array called “young peeps” of all peeps less than 30.
+// 5. Return/save in a variable a new array called “young peeps” of all peeps less than 30.
 
-// 6. Sort the peeps by age from oldest to youngest in an new array called “sortedPeeps”.
+// 6. Sort the peeps by age from oldest to youngest in an new array called “sortedPeeps”. use Array.sort()
 
 // 7. Create a new array called “firstNamePeeps” with only the first names of the peeps.
 
 // HARDER CHALLENGES (using the comments object and peeps array) //
 
-// 1. List all the comments in an array of strings called “commentsArray”
+// 1. List all the comments text  in an array of strings called “commentsTextArray” use array.push() or even harder use array.map()
 
-// 2. Return all comments with the word “love” in the comment in a new array called “loveComments”
+// 2. Return all comments with the word “love” in the comment text in a new array called “loveComments” 
 
 // 3. List all the comments in an array called “sortedCommentsArray" from lowest rating to highest rating. Ignore comments without a rating.
 
