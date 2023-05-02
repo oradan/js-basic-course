@@ -97,4 +97,3 @@ const comments = {
 // 7. Group all comments by the user who made the comment. Return a new object called “groupedPeepComments” with the user’s first and last name as a camelcase string key. The value of each object should be an array of comment objects by the person.
 
 
-// <email>/session_3/exercisess
