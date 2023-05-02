@@ -67,34 +67,100 @@ const comments = {
 
 // 1. Count the number of people in the peeps array.
 
+const countPeople = peeps.length
+console.log(countPeople)
+
 // 2. List full names of people in a new array of strings.
 
+const fullNames = peeps.map(person => `${person.name.first} ${person.name.last}`)
+console.log(fullNames)
+
 // 3. Return/save in a variable  “true” if everyone is older than 24 and save in a constant use peeps array Ex: allAre24.
+const isEveryoneOlderThan24 = peeps.every(person => person.age > 24)
+console.log(isEveryoneOlderThan24)
 
 // 4. Return/save in a variable “true” if at least one person is younger than 26.
 
+const isYoungerThan26 = peeps.some(person => person.age < 26);
+console.log(isYoungerThan26)
+
 // 5. Return/save in a variable a new array called “young peeps” of all peeps less than 30.
+
+const youngPeeps = peeps.filter(person => person.age < 30)
+console.log(youngPeeps)
 
 // 6. Sort the peeps by age from oldest to youngest in an new array called “sortedPeeps”. use Array.sort()
 
+const sortedPeeps = peeps.sort((a, b) => b.age - a.age)
+console.log(sortedPeeps)
+
 // 7. Create a new array called “firstNamePeeps” with only the first names of the peeps.
 
+const firstNamePeeps = peeps.map(person => person.name.first)
+console.log(firstNamePeeps)
 // HARDER CHALLENGES (using the comments object and peeps array) //
 
 // 1. List all the comments text  in an array of strings called “commentsTextArray” use array.push() or even harder use array.map()
 
+const commentsTextArray = Object.values(comments)
+        .map(comment => comment.text)
+
+console.log(commentsTextArray)
+
+
 // 2. Return all comments with the word “love” in the comment text in a new array called “loveComments” 
 
+const loveComments = Object.values(comments)
+    .filter(comment => comment.text.includes('love'))
+
+console.log(loveComments)
+
 // 3. List all the comments in an array called “sortedCommentsArray" from lowest rating to highest rating. Ignore comments without a rating.
+const sortedCommentsArray = Object.values(comments)
+  .filter(comment => comment.rating !== undefined)
+  .sort((a, b) => a.rating - b.rating)
+
+console.log(sortedCommentsArray);
 
 // 4. Return a new object called “commentObj” with the comment id as a key and the comment text as the value.
+const commentObj = {};
 
+for (const key in comments) {
+  if (comments.hasOwnProperty(key)) {
+    commentObj[key] = comments[key].text;
+  }
+}
+  
+  console.log(commentObj);
 // 5. Return a new object called “groupedRatings” with the rating as a key and an array of comments text with that rating as the value. 
 // Ignore comments without a rating.
 
+const groupedRatings = {};
+
+for (const key in comments) {
+  const comment = comments[key];
+  // check if the object have rating 
+  if (comment.hasOwnProperty("rating")) {
+    //check if the corresponding rating key exists 
+    if (!groupedRatings[comment.rating]) {
+      groupedRatings[comment.rating] = [comment.text];
+    } else {
+        //If the key already exists push comment text into array
+      groupedRatings[comment.rating].push(comment.text);
+    }
+  }
+}
+
+console.log(groupedRatings)
 // 6. Return the average rating of all comments.
+const ratings = Object.values(comments).filter(comment => comment.rating).map(comment => comment.rating);
+const sum = ratings.reduce((acc, rating) => acc + rating, 0);
+
+// Divide the sum by the total number of ratings
+const average = sum / ratings.length
+console.log(average)
 
 // 7. Group all comments by the user who made the comment. Return a new object called “groupedPeepComments” with the user’s first and last name as a camelcase string key. The value of each object should be an array of comment objects by the person.
 
 
-// <email>/session_3/exercisess
+// bandula.cristi@gmail.com/session_3/exercisess
