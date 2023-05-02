@@ -66,19 +66,31 @@ const comments = {
 // EASIER CHALLENGES (using the peeps array) //
 
 // 1. Count the number of people in the peeps array.
+const numPeople = peeps.length;
+console.log(numPeople);
 
 // 2. List full names of people in a new array of strings.
+const fullNames = peeps.map(
+  (person) => `${person.name.first} ${person.name.last}`
+);
+console.log(fullNames);
 
 // 3. Return/save in a variable  “true” if everyone is older than 24 and save in a constant use peeps array Ex: allAre24.
-
+const allAre24 = peeps.every((person) => person.age > 24);
+console.log(allAre24);
 // 4. Return/save in a variable “true” if at least one person is younger than 26.
+const hasOneYoungerThan26 = peeps.some((person) => person.age < 26);
+console.log(hasOneYoungerThan26);
 
 // 5. Return/save in a variable a new array called “young peeps” of all peeps less than 30.
-
+const youngPeeps = peeps.filter((person) => person.age < 30);
+console.log(youngPeeps);
 // 6. Sort the peeps by age from oldest to youngest in an new array called “sortedPeeps”. use Array.sort()
-
+const sortedPeeps = peeps.sort((a, b) => b.age - a.age);
+console.log(sortedPeeps);
 // 7. Create a new array called “firstNamePeeps” with only the first names of the peeps.
-
+const firstNamePeeps = peeps.map((person) => person.name.first);
+console.log(firstNamePeeps);
 // HARDER CHALLENGES (using the comments object and peeps array) //
 
 // 1. List all the comments text  in an array of strings called “commentsTextArray” use array.push() or even harder use array.map()
