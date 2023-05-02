@@ -202,3 +202,15 @@ Example of returned object:
 }
 
 ```
+
+## Git commands 
+
+* Git ```pull origin <branch name>``` ( get the latest changes from remote repo)
+
+* Checkout and create new branch  ```git checkout -b <new branch name>```
+* Start making the changes on the new branch
+* Stage the changes ```git add . ``` (add all changed files) or ```git add <path to the changed files>``` 
+* Commit the changes ```git commit -m "short description of changes" ```
+* Push the changes ```git push origin <branch name>``` 
+
+That is all :) 
