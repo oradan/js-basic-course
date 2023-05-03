@@ -94,19 +94,77 @@ console.log(firstNamePeeps);
 // HARDER CHALLENGES (using the comments object and peeps array) //
 
 // 1. List all the comments text  in an array of strings called “commentsTextArray” use array.push() or even harder use array.map()
+const commentsTextArray = [];
 
-// 2. Return all comments with the word “love” in the comment text in a new array called “loveComments” 
+for (const commentId in comments) {
+  commentsTextArray.push(comments[commentId].text);
+}
 
+console.log(commentsTextArray);
+// 2. Return all comments with the word “love” in the comment text in a new array called “loveComments”
+const loveComments = Object.values(comments).filter((comment) =>
+  comment.text.includes("love")
+);
+
+console.log(loveComments);
 // 3. List all the comments in an array called “sortedCommentsArray" from lowest rating to highest rating. Ignore comments without a rating.
+const sortedCommentsArray = Object.values(comments)
+  .filter((comment) => comment.rating !== undefined)
+  .sort((comment1, comment2) => comment1.rating - comment2.rating);
 
+console.log(sortedCommentsArray);
 // 4. Return a new object called “commentObj” with the comment id as a key and the comment text as the value.
+const commentObj = {};
 
-// 5. Return a new object called “groupedRatings” with the rating as a key and an array of comments text with that rating as the value. 
+for (const [id, comment] of Object.entries(comments)) {
+  commentObj[id] = comment.text;
+}
+
+console.log(commentObj);
+// 5. Return a new object called “groupedRatings” with the rating as a key and an array of comments text with that rating as the value.
 // Ignore comments without a rating.
+const groupedRatings = {};
+
+for (const [id, comment] of Object.entries(comments)) {
+  const rating = comment.rating;
+  if (rating !== undefined) {
+    if (!groupedRatings[rating]) {
+      groupedRatings[rating] = [];
+    }
+    groupedRatings[rating].push(comment.text);
+  }
+}
+
+console.log(groupedRatings);
 
 // 6. Return the average rating of all comments.
+let rating_nr = 0;
+let rating_score = 0;
+for (const [id, comment] of Object.entries(comments)) {
+  const rating = comment.rating;
+  if (rating !== undefined) {
+    rating_nr = rating_nr + 1;
+    rating_score = rating_score + comment.rating;
+  }
+}
+const avg_rating = rating_score / rating_nr;
+console.log(avg_rating);
 
 // 7. Group all comments by the user who made the comment. Return a new object called “groupedPeepComments” with the user’s first and last name as a camelcase string key. The value of each object should be an array of comment objects by the person.
+const groupedPeepComments = {};
+
+for (const [id, comment] of Object.entries(comments)) {
+  const peep = peeps.find((peep) => peep.id === comment.userId);
+  if (peep) {
+    const peepName = `${peep.name.first}${peep.name.last}`.toLowerCase();
+    if (!groupedPeepComments[peepName]) {
+      groupedPeepComments[peepName] = [];
+    }
+    groupedPeepComments[peepName].push(comment);
+  }
+}
+
+console.log(groupedPeepComments);
 
 
 // <email>/session_3/exercisess
