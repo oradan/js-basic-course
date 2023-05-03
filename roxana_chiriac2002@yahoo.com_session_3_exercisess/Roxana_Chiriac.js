@@ -89,6 +89,8 @@ console.log(allAre24);
 // 4. Return/save in a variable “true” if at least one person is younger than 26.
 console.log('4. Return/save in a variable “true” if at least one person is younger than 26.');
 
+// a better solution would be to use some() method BUT your logic is also good
+
 const notAllAre26 = peeps.find(i=> i.age < 26);
 function bool(arr){
 if (notAllAre26) return true;
@@ -194,7 +196,7 @@ console.log('6. Return the average rating of all comments.');
 const ratings = Object.values(comments).filter(comment => comment.rating).map(comment => comment.rating); //returneaza ratingurile fara cele care nu au rating
 const averageRating = ratings.reduce((acc, currval) => acc + currval, 0) / ratings.length;
 
-console.log(averageRating); // ? 4
+console.log(averageRating); // ? 4 to round the value use Math.round(averageRating)
 // 7. Group all comments by the user who made the comment. Return a new object called “groupedPeepComments” with the user’s first and last name as a camelcase string key. The value of each object should be an array of comment objects by the person.
 console.log('7. Group all comments by the user who made the comment. Return a new object called “groupedPeepComments” with the user’s first and last name as a camelcase string key. The value of each object should be an array of comment objects by the person.');
 
@@ -208,10 +210,18 @@ for (const commentId in comments) {
   }
 
   const key = `${user.name.first}${user.name.last}`;
+  // if (!groupedPeepComments[key]) {
+  //   groupedPeepComments[key] = [];
+  // }
+  // groupedPeepComments[key].push(comment);
+
+  // this aproach assign directly the value
   if (!groupedPeepComments[key]) {
-    groupedPeepComments[key] = [];
+    groupedPeepComments[key] = [comment];
+  } else {
+    groupedPeepComments[key].push(comment);
   }
-  groupedPeepComments[key].push(comment);
+  
 }
 console.log(groupedPeepComments);
 
