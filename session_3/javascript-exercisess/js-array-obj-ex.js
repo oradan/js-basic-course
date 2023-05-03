@@ -121,6 +121,18 @@ console.log(commentObj);
 // Ignore comments without a rating.
 
 // 6. Return the average rating of all comments.
+let totalRating = 0;
+let numRatings = 0;
+
+for (const commentId in comments) {
+  const comment = comments[commentId];
+  if (comment.rating !== undefined) {
+    totalRating += comment.rating;
+    numRatings++;
+  }
+}
+
+const averageRating = totalRating / numRatings;
 
 // 7. Group all comments by the user who made the comment. Return a new object called “groupedPeepComments” with the user’s first and last name as a camelcase string key. The value of each object should be an array of comment objects by the person.
 
