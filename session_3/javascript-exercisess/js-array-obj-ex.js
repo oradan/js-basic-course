@@ -70,6 +70,7 @@ const nrOfPeeps = peeps.length;
 console.log(nrOfPeeps);
 
 // 2. List full names of people in a new array of strings.
+// the destructuring is not necessary because the map method already return a shallow copy of the original Same for ex 3,4,5,7
 const fullNames = [...peeps].map(person => `${person.name.first} ${person.name.last}`);
 console.log(fullNames);
 
