@@ -128,10 +128,17 @@ const groupedRatings = {};
 for (const [id, comment] of Object.entries(comments)) {
   const rating = comment.rating;
   if (rating !== undefined) {
+    // if (!groupedRatings[rating]) {
+    //   groupedRatings[rating] = [];// need a discuttion for all group => first asign an ampty array then populate it
+    // }
+    // groupedRatings[rating].push(comment.text);
+
     if (!groupedRatings[rating]) {
-      groupedRatings[rating] = [];
+      groupedRatings[rating] = [comment.text];
+    } else {
+      groupedRatings[rating].push(comment.text);
     }
-    groupedRatings[rating].push(comment.text);
+    
   }
 }
 
@@ -143,8 +150,11 @@ let rating_score = 0;
 for (const [id, comment] of Object.entries(comments)) {
   const rating = comment.rating;
   if (rating !== undefined) {
-    rating_nr = rating_nr + 1;
-    rating_score = rating_score + comment.rating;
+    // rating_nr = rating_nr + 1;
+    // rating_score = rating_score + comment.rating;
+    // you can use incrementation
+    rating_nr += 1;
+    rating_score += comment.rating;
   }
 }
 const avg_rating = rating_score / rating_nr;
@@ -152,7 +162,7 @@ console.log(avg_rating);
 
 // 7. Group all comments by the user who made the comment. Return a new object called “groupedPeepComments” with the user’s first and last name as a camelcase string key. The value of each object should be an array of comment objects by the person.
 const groupedPeepComments = {};
-
+// same as ex 5
 for (const [id, comment] of Object.entries(comments)) {
   const peep = peeps.find((peep) => peep.id === comment.userId);
   if (peep) {
