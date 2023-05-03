@@ -134,13 +134,51 @@ const sortedCommentsArray = ratingArray.sort((a, b) => a.rating - b.rating);
 console.log(sortedCommentsArray);
 
 // 4. Return a new object called “commentObj” with the comment id as a key and the comment text as the value.
-const commnetObj = Object.entries(comments);
-console.log(commnetObj);
+const commentKey = Object.keys(comments);
+const commentValue = Object.values(comments).map((element) => element.text);
+const commentObj = {};
+commentKey.forEach((element, index) => {
+  commentObj[element] = commentValue[index];
+});
+console.log(commentObj);
+
 // 5. Return a new object called “groupedRatings” with the rating as a key and an array of comments text with that rating as the value.
 // Ignore comments without a rating.
+const commentsValueRating = Object.values(comments).filter(
+  (element) => element.rating
+);
+const ratingId = commentsValueRating.map((element) => element.rating);
+console.log(ratingId);
+const valueText = commentsValueRating.map((element) => element.text);
+console.log(valueText);
+const objRating = {};
+ratingId.forEach((element, index) => {
+  objRating[element] = [valueText[index]];
+});
+console.log(objRating);
 
 // 6. Return the average rating of all comments.
+const ratingAvgSum = ratingId.reduce(
+  (sum, currentValue) => (sum += currentValue),
+  0
+);
+const ratingAvg = Math.round(ratingAvgSum / ratingId.length);
+console.log(ratingAvg);
 
 // 7. Group all comments by the user who made the comment. Return a new object called “groupedPeepComments” with the user’s first and last name as a camelcase string key. The value of each object should be an array of comment objects by the person.
-
+const fullNamePeeps = peeps.map((peep) => {
+  const {
+    name: { first, last },
+  } = peep;
+  const firstName = first.toLowerCase();
+  return `${firstName + last}`;
+});
+console.log(fullNamePeeps);
+const listValues = Object.values(comments);
+console.log(listValues);
+const groupedPeepComments = {};
+fullNamePeeps.forEach((element, index) => {
+  groupedPeepComments[element] = listValues[index];
+});
+console.log(groupedPeepComments);
 // <email>/session_3/exercisess
