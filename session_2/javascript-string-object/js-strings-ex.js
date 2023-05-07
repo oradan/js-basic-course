@@ -7,3 +7,12 @@ replace word ‘apples’ wit ‘oranges’ . If the word that needs to be repla
 
 Result: Oranges are round, and oranges are juicy.
 */
+
+const applesString = "Apples are round, and apples are juicy.";
+const regexA = /apples/gi;
+const orangesString = applesString.replace(regexA, (word) => {
+  const isUpperCase = word.charAt(0) === word[0].toUpperCase();
+  return isUpperCase ? "Oranges" : "oranges";
+});
+
+console.log(orangesString);

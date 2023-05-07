@@ -94,8 +94,8 @@ const youngPeeps = peeps.filter((person) => person.age < 30);
 console.log(youngPeeps);
 
 // 6. Sort the peeps by age from oldest to youngest in an new array called “sortedPeeps”. use Array.sort()
-// const sortedPeeps = peeps.sort((a, b) => b.age - a.age);
-// console.log(sortedPeeps);
+const sortedPeeps = [...peeps].sort((a, b) => b.age - a.age);
+console.log(sortedPeeps);
 //modifica array-ul initial
 
 // 7. Create a new array called “firstNamePeeps” with only the first names of the peeps.
@@ -135,11 +135,10 @@ console.log(sortedCommentsArray);
 
 // 4. Return a new object called “commentObj” with the comment id as a key and the comment text as the value.
 const commentKey = Object.keys(comments);
-const commentValue = Object.values(comments).map((element) => element.text);
-const commentObj = {};
-commentKey.forEach((element, index) => {
-  commentObj[element] = commentValue[index];
-});
+const commentObj = commentKey.reduce(
+  (acc, currentVal) => ({ ...acc, [currentVal]: comments[currentVal].text }),
+  {}
+);
 console.log(commentObj);
 
 // 5. Return a new object called “groupedRatings” with the rating as a key and an array of comments text with that rating as the value.
@@ -148,13 +147,14 @@ const commentsValueRating = Object.values(comments).filter(
   (element) => element.rating
 );
 const ratingId = commentsValueRating.map((element) => element.rating);
-console.log(ratingId);
 const valueText = commentsValueRating.map((element) => element.text);
-console.log(valueText);
-const objRating = {};
-ratingId.forEach((element, index) => {
-  objRating[element] = [valueText[index]];
-});
+const objRating = ratingId.reduce((acc, currentRating, valueText) => {
+  acc[currentRating] = [
+    ...(acc[currentRating] || []),
+    commentsValueRating[valueText],
+  ];
+  return acc;
+}, {});
 console.log(objRating);
 
 // 6. Return the average rating of all comments.
@@ -166,19 +166,16 @@ const ratingAvg = Math.round(ratingAvgSum / ratingId.length);
 console.log(ratingAvg);
 
 // 7. Group all comments by the user who made the comment. Return a new object called “groupedPeepComments” with the user’s first and last name as a camelcase string key. The value of each object should be an array of comment objects by the person.
-const fullNamePeeps = peeps.map((peep) => {
-  const {
-    name: { first, last },
-  } = peep;
-  const firstName = first.toLowerCase();
-  return `${firstName + last}`;
-});
-console.log(fullNamePeeps);
 const listValues = Object.values(comments);
-console.log(listValues);
-const groupedPeepComments = {};
-fullNamePeeps.forEach((element, index) => {
-  groupedPeepComments[element] = listValues[index];
-});
+const groupedPeepComments = peeps.reduce(
+  (acc, { name: { first, last }, id }) => {
+    acc[`${first.toLocaleLowerCase()}${last}`] = listValues.filter(
+      (i) => id === i.userId
+    );
+    console.log(acc, `=> ${id}`);
+    return acc;
+  },
+  {}
+);
 console.log(groupedPeepComments);
 // <email>/session_3/exercisess
