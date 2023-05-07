@@ -72,6 +72,7 @@ for (let i = 0; i < peeps.length; i++) {
 console.log(numberOfPeople);
 
 // 2. List full names of people in a new array of strings.
+// You can distructuring the parameter person in the call back function EX: .map({first,last})
 const fullName = peeps.map((person) => {
   const {
     name: { first, last },
@@ -134,7 +135,9 @@ const sortedCommentsArray = ratingArray.sort((a, b) => a.rating - b.rating);
 console.log(sortedCommentsArray);
 
 // 4. Return a new object called “commentObj” with the comment id as a key and the comment text as the value.
+// do not relay on the position , find a solution to reference directly
 const commentKey = Object.keys(comments);
+//commentObj[element] = commentValue[index];
 const commentObj = commentKey.reduce(
   (acc, currentVal) => ({ ...acc, [currentVal]: comments[currentVal].text }),
   {}
